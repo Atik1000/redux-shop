@@ -1,0 +1,25 @@
+$First-color:gray;
+$Second-color:#fff;
+$third-color:blue;
+.menu{
+ 
+    height: 60px;
+    background-color: $First-color;
+    input{
+        margin: 0;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: inherit;
+        width: 435px;
+        line-height: inherit;
+        height: 44px;
+    }
+a{
+    text-decoration: none;
+    margin-right: 20px;
+    color: $Second-color;
+    &:hover{
+        color: $third-color;
+    }
+}
+}

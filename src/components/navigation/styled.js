@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const MenuWrapper = styled.div`
-background-color:green;
+// background-color:green;
 ul{
     padding:10px 0;
     margin:0;
