@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import {useSelector,useDispatch} from 'react-redux'
+import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import Loading from "../../components/loader";
+import {
+  Col,
+  Container,
+  Row,
+  Image,
+  CardImg,
+  ListGroup,
+  Item,
+  ListGroupItem,
+  Card,
+  Button,
+} from "reactstrap";
 
-const ProductDetail = ({cart,setCart}) => {
-  const cartStore=useSelector((state)=>state);
-  const dispatch=useDispatch();
+const ProductDetail = ({ cart, setCart }) => {
+  const cartStore = useSelector((state) => state);
+  const dispatch = useDispatch();
   const params = useParams();
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState([]);
@@ -27,15 +39,15 @@ const ProductDetail = ({cart,setCart}) => {
       });
   }, []);
 
-const addToCart=()=>{
-  dispatch({
-    type:'ADD_TO_CART',
-    payload:cartStore.cart?cartStore.cart+1:1,
-  })
-}
+  const addToCart = () => {
+    dispatch({
+      type: "ADD_TO_CART",
+      payload: cartStore.cart ? cartStore.cart + 1 : 1,
+    });
+  };
 
   return (
-    <div className="container">
+    <>
       {loading === true ? (
         <div>
           <Loading />
@@ -43,41 +55,59 @@ const addToCart=()=>{
       ) : found === undefined ? (
         <h1>Page Not Found</h1>
       ) : (
-        <div className="container">
-          <div class="card mb-3">
-            <div class="row g-0">
-              <div class="col-md-4">
-                <img src={product.image} alt="img" />
-              </div>
-              <div class="col-md-8">
-                <div class="card-body">
-                  <h5>Product Name: {product.title}</h5>
-                  <p>
-                    <strong>Description:</strong>
-                    {product.description}
-                  </p>
-                  <p>
-                    <strong>Description:</strong>
-                    {product.category}
-                  </p>
-                  <p>Price: {product.price}</p>
-                  <Link className="btn btn-primary" to="/">
-                    back to Home
-                  </Link>
-                  <button
-                    class="btn btn-warning mt-4"
-                   onClick={addToCart}
-                  >
-                    Add To Cart
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Container>
+          <Link to="/" className="btn btn-light my-3">
+            Go Back
+          </Link>
+          <Row>
+            <Col md={6}>
+              <CardImg
+                style={{ width: "350px", height: "350px" }}
+                src={product.image}
+                alt={product.name}
+                fluid
+              />
+            </Col>
+            <Col md={3}>
+              <ListGroup variant="flush">
+                <ListGroupItem>{product.title}</ListGroupItem>
+                <ListGroupItem> Price : ${product.price}</ListGroupItem>
+                <ListGroupItem>
+                  {" "}
+                  Description : {product.description}
+                </ListGroupItem>
+              </ListGroup>
+            </Col>
+
+            <Col md={3}>
+              <Card>
+                <ListGroup variant="flush">
+                  <ListGroupItem>
+                    <Row>
+                      <Col>Price:</Col>
+                      <Col>
+                        <strong>${product.price}</strong>
+                      </Col>
+                    </Row>
+                  </ListGroupItem>
+                  <ListGroupItem>
+                    <Row>
+                      <Col>Status:</Col>
+                      <Col>In Stock</Col>
+                    </Row>
+                  </ListGroupItem>
+                </ListGroup>
+                <ListGroupItem>
+                  <Button onClick={addToCart} className='btn-block' type='button'>Add to Cart</Button>
+                </ListGroupItem>
+              </Card>
+            </Col>
+          </Row>
+        </Container>
       )}
-    </div>
+    </>
   );
 };
 
 export default ProductDetail;
+
