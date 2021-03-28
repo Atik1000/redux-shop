@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 import Loading from "../../components/loader";
+import {useSelector,useDispatch} from 'react-redux';
 import {
   Card,
   CardBody,

@@ -1,11 +1,11 @@
 import React from 'react';
 import Navigation from "../navigation"
 
-const Header = ({cart}) => {
+const Header = () => {
     return (
         <div>
        
-            <Navigation cart={cart}/>
+            <Navigation/>
         </div>
     );
 };

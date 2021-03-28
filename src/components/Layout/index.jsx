@@ -2,11 +2,11 @@ import React from "react";
 import Footer from "../Footer";
 import Header from "../Header";
 
-const Layout = ({ children,cart }) => {
+const Layout = ({ children}) => {
   console.log(children, "==children");
   return (
     <>
-      <Header cart={cart} />
+      <Header />
       {children}
       <Footer />
     </>

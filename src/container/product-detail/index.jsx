@@ -7,29 +7,35 @@ import {
   Col,
   Container,
   Row,
-  Image,
   CardImg,
   ListGroup,
-  Item,
   ListGroupItem,
   Card,
   Button,
 } from "reactstrap";
 
-const ProductDetail = ({ cart, setCart }) => {
-  const cartStore = useSelector((state) => state);
+const ProductDetail = () => {
+  const cartStore = useSelector((state) => state.cartStore);
+  const product=useSelector((state)=>state.productStore)
   const dispatch = useDispatch();
-  const params = useParams();
+
   const [loading, setLoading] = useState(true);
-  const [product, setProduct] = useState([]);
+  // const [product, setProduct] = useState([]);
   const [found, setFound] = useState(null);
 
   const { id } = useParams();
+  // console.log(cartStore,'===my cart');
+
+  const {selectedProduct}=useSelector((state)=>state.productStore)
   useEffect(() => {
     axios
       .get(`https://fakestoreapi.herokuapp.com/products/${id}/`)
       .then((res) => {
-        setProduct(res.data);
+        // setProduct(res.data);
+        dispatch({
+          type:"STORE_PRODUCT",
+          payload:res.data,
+        })
         setLoading(false);
       })
       .catch((err) => {
@@ -39,12 +45,13 @@ const ProductDetail = ({ cart, setCart }) => {
       });
   }, []);
 
-  const addToCart = () => {
+            
+  const addToCart=()=>{
     dispatch({
-      type: "ADD_TO_CART",
-      payload: cartStore.cart ? cartStore.cart + 1 : 1,
-    });
-  };
+        type:'ADD_TO_CART',
+        payload:cartStore.cart?cartStore.cart+1:1
+    })
+}
 
   return (
     <>
@@ -73,7 +80,7 @@ const ProductDetail = ({ cart, setCart }) => {
                 <ListGroupItem>{product.title}</ListGroupItem>
                 <ListGroupItem> Price : ${product.price}</ListGroupItem>
                 <ListGroupItem>
-                  {" "}
+            
                   Description : {product.description}
                 </ListGroupItem>
               </ListGroup>

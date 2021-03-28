@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import {
-
   Container,
   Navbar,
   NavItem,
-
   NavbarBrand,
   NavbarToggler,
   Collapse,
@@ -17,7 +15,7 @@ import {
 import "./style.scss";
 
 const Navigation = () => {
-  const cartReducer = useSelector((state) => state);
+  const cartReducer = useSelector((state) => state.cartStore);
   console.log(cartReducer, "cartReducer Navigation");
   return (
     <>
@@ -34,6 +32,7 @@ const Navigation = () => {
                 <Link className="ml-4" to="/cart">
                   <i className="fa fa-shopping-cart"></i>
                   CART
+                  : {cartReducer.cart}
                 </Link>
               </NavItem>
               <NavItem>
@@ -43,11 +42,7 @@ const Navigation = () => {
                 </Link>
               </NavItem>
             </Nav>
-            <NavbarText>
-      
-              <i className="fa fa-shopping-cart"></i>
-              {cartReducer.cart}
-            </NavbarText>
+        
           </Collapse>
         </Container>
       </Navbar>

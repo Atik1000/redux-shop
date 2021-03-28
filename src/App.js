@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.scss";
 
 import {
@@ -15,8 +15,6 @@ import Auth from "./components/Auth";
 import Cart from "./components/Cart";
 
 const App = () => {
-
-
   return (
     <>
       <Router>
@@ -34,7 +32,6 @@ const App = () => {
             <Route exact path={"/cart"}>
               <Cart />
             </Route>
-
             <Route exact path={"/404"}>
               <NotFound />
             </Route>
@@ -47,3 +44,5 @@ const App = () => {
 };
 
 export default App;
+
+
